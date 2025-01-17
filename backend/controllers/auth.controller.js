@@ -17,7 +17,9 @@ const register = async(req, res)=>{
             await User.save();
             res.status(201).json({ success:true, message: `User created successfully` });
         } catch (error) {
+            console.error(err.stack);
             res.status(500).json({ success:false, message: `Error creating User` });
+
         }
     }else if(role==='Admin'){
         try {
@@ -31,10 +33,12 @@ const register = async(req, res)=>{
             await Admin.save();
             res.status(201).json({ success:true, message: `Admin created successfully` });
         } catch (error) {
+            console.error(err.stack);
             res.status(500).json({ success:false, message: `Error creating admin` });
         }
 
     }else{
+        console.error(err.stack);
         res.status(400).json({ message: 'invalid role' });
     }
 

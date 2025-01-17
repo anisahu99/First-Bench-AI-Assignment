@@ -19,6 +19,7 @@ const reActivateAccount = async(req, res)=>{
         );
         res.status(200).json({ message: 'Account reactivated successfully' });
     } catch (error) {
+        console.error(err.stack);
         res.status(500).json({ message: 'Server error', error: err.message });
     }
 }
@@ -43,6 +44,7 @@ const deActivateAccount = async(req, res)=>{
         );
         res.status(200).json({ message: 'Account Deactivated successfully' });
     } catch (error) {
+        console.error(err.stack);
         res.status(500).json({ message: 'Server error', error: err.message });
     }
 }
@@ -50,7 +52,8 @@ const deActivateAccount = async(req, res)=>{
 // updataUserDetails
 
 const updateDetails = async(req, res)=>{
-    const { name, email, phoneNumber, password } = req.body;
+    const { email } = req.user;
+    const { updateName, updateEmail, updatePhoneNumber, updatePassword } = req.body;
     
     try {
         const user = await User.findOne( { email } );
@@ -60,10 +63,11 @@ const updateDetails = async(req, res)=>{
         
         await User.updateOne(
             { email },  // Filter to find the document
-            { $set: { name, email, password } } // Update to set a new value for the field
+            { $set: { name: updateName, email: updateEmail, password: updatePassword } } // Update to set a new value for the field
         );
         res.status(200).json({ message: 'Updated successfully' });
     } catch (error) {
+        console.error(err.stack);
         res.status(500).json({ message: 'Server error', error: err.message });
     }
 }
