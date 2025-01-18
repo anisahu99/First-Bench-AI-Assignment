@@ -1,3 +1,4 @@
+// user.routes.js
 const express = require('express');
 const router = express.Router();
 const { reActivateAccount, deActivateAccount, updateDetails } = require('../controllers/user.controller');

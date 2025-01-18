@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const bcrypt = require('bcrypt');
 
 // Define the user schema
 const userSchema = new mongoose.Schema({
@@ -27,7 +28,7 @@ const userSchema = new mongoose.Schema({
                 // Optional: Add regex for password complexity
                 return /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d@$!%*?&]{8,}$/.test(v);
             },
-            message: "Password must be at least 8 characters long and contain at least one letter and one number."
+            message: "In mongo validation Password must be at least 8 characters long and contain at least one letter and one number."
         }
     },
     phoneNumber: {
@@ -46,8 +47,22 @@ const userSchema = new mongoose.Schema({
         type: String,
         enum: ['Active', 'Deactivated'], // Restrict values to 'Active' or 'Deactivate'
         default: 'Active' // Optional: Set a default value
-    }
+    },
+
+},{
+    timestamps: true, // Adds createdAt and updatedAt fields
+  }
+);
+
+// Pre-save hook to hash password
+userSchema.pre('save', async function (next) {
+    if (!this.isModified('password')) return next();
+    const salt = await bcrypt.genSalt(10);
+    this.password = await bcrypt.hash(this.password, salt);
+    next();
 });
+
+
 
 // Create the User model
 module.exports = mongoose.model('User', userSchema);

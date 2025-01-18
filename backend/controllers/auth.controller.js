@@ -12,11 +12,10 @@ const register = async(req, res)=>{
                 return res.status(400).json({ message: 'email already exist!' });
             }
         
-            const hashedPassword = await bcr.hash(password, 10);
-            const user = new User({name, email, password: hashedPassword, phoneNumber, role});
-            await User.save();
+            const user = new User({name, email, password, phoneNumber, role});
+            await user.save();
             res.status(201).json({ success:true, message: `User created successfully` });
-        } catch (error) {
+        } catch (err) {
             console.error(err.stack);
             res.status(500).json({ success:false, message: `Error creating User` });
 
@@ -24,21 +23,19 @@ const register = async(req, res)=>{
     }else if(role==='Admin'){
         try {
             const existAdmin = await Admin.findOne( { email } );
-            if(existUser){
+            if(existAdmin){
                 return res.status(400).json({ message: 'email already exist!' });
             }
         
-            const hashedPassword = await bcr.hash(password, 10);
-            const admin = new User({name, email, password: hashedPassword, phoneNumber});
-            await Admin.save();
+            const admin = new Admin({name, email, password, phoneNumber});
+            await admin.save();
             res.status(201).json({ success:true, message: `Admin created successfully` });
-        } catch (error) {
+        } catch (err) {
             console.error(err.stack);
             res.status(500).json({ success:false, message: `Error creating admin` });
         }
 
     }else{
-        console.error(err.stack);
         res.status(400).json({ message: 'invalid role' });
     }
 
@@ -60,15 +57,16 @@ const login = async(req, res)=>{
             }
             
             // Generate JWT
-            const token = jwt.sign( { name:user.name, email: user.email, role:'User' }, process.env.JWT_SECRET_KEY, { expireIn: '1d' } );
+            const token = jwt.sign( { name:user.name, email: user.email, role:'User' }, process.env.JWT_SECRET_KEY, { expiresIn: '1d' } );
     
             if(user.status==='Deactivated'){
                 return res.status(400).json({ message: 'This account has been deactivated', token });
             }
     
             res.status(200).json({ success:true, message: `user login successfully`, token });
-        } catch (error) {
-            res.status(500).json({ success:false, message: `Error loging user`, error: error.message });
+        } catch (err) {
+            console.error(err.stack);
+            res.status(500).json({ success:false, message: `Error loging user`, error: err.message });
         }
     }else if(role==='Admin'){
         try{
@@ -83,16 +81,13 @@ const login = async(req, res)=>{
             }
             
             // Generate JWT
-            const token = jwt.sign( { name:admin.name, email: admin.email, role:'Admin' }, process.env.JWT_SECRET_KEY, { expireIn: '1d' } );
-    
-            if(admin.status==='Deactivated'){
-                return res.status(400).json({ message: 'This account has been deactivated', token });
-            }
+            const token = jwt.sign( { name:admin.name, email: admin.email, role:'Admin' }, process.env.JWT_SECRET_KEY, { expiresIn: '1d' } );
     
             res.status(200).json({ success:true, message: `admin login successfully`, token });
         }
-        catch (error) {
-            res.status(500).json({ success:false, message: `Error loging admin`, error: error.message });
+        catch (err) {
+            console.error(err.stack);
+            res.status(500).json({ success:false, message: `Error loging admin`, error: err.message });
         }
     }else{
         res.status(400).json({ message: 'invalid role' });

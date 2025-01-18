@@ -1,0 +1,271 @@
+{
+	"info": {
+		"_postman_id": "c9bcd05b-477c-4ee5-849a-8cffe84272a4",
+		"name": "User-Management-System-API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "22933336"
+	},
+	"item": [
+		{
+			"name": "User APIs",
+			"item": [
+				{
+					"name": "Register User API",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"John Doe\",\r\n    \"email\": \"johndoe@gmail.com\",\r\n    \"password\": \"johndoe@S4\",\r\n    \"phoneNumber\": \"9485789898\",\r\n    \"role\": \"User\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/profile/register",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"profile",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login User API",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"johndoe@gmail.com\",\r\n    \"password\": \"johndoe@S4\",\r\n    \"role\": \"User\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/profile/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"profile",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update User API",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiSm9obiBEb2UiLCJlbWFpbCI6ImpvaG5kb2VAZ21haWwuY29tIiwicm9sZSI6IlVzZXIiLCJpYXQiOjE3MzcxNDEyNzcsImV4cCI6MTczNzIyNzY3N30.ftdi746kjQ4bI7FEGAzcWcfagjhStKUG0bTi_3Uy6oI",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"updateName\": \"John Updated\",\r\n  \"updatePhoneNumber\": \"0987654321\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/user",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "User Deactivate API",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiSm9obiBEb2UiLCJlbWFpbCI6ImpvaG5kb2VAZ21haWwuY29tIiwicm9sZSI6IlVzZXIiLCJpYXQiOjE3MzcxNDEyNzcsImV4cCI6MTczNzIyNzY3N30.ftdi746kjQ4bI7FEGAzcWcfagjhStKUG0bTi_3Uy6oI",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/api/user/deactivate",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"user",
+								"deactivate"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "User Reactivate API",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiSm9obiBEb2UiLCJlbWFpbCI6ImpvaG5kb2VAZ21haWwuY29tIiwicm9sZSI6IlVzZXIiLCJpYXQiOjE3MzcxNDEyNzcsImV4cCI6MTczNzIyNzY3N30.ftdi746kjQ4bI7FEGAzcWcfagjhStKUG0bTi_3Uy6oI",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/api/user/reactivate",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"user",
+								"reactivate"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Admin APIs",
+			"item": [
+				{
+					"name": "Admin Register API",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Admin Doe\",\r\n    \"email\": \"admindoe@gmail.com\",\r\n    \"password\": \"admindoe@S4\",\r\n    \"phoneNumber\": \"9485789898\",\r\n    \"role\": \"Admin\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/profile/register",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"profile",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Admin Login API",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"admindoe@gmail.com\",\r\n    \"password\": \"admindoe@S4\",\r\n    \"role\": \"Admin\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/profile/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"profile",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Users API",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiQWRtaW4gRG9lIiwiZW1haWwiOiJhZG1pbmRvZUBnbWFpbC5jb20iLCJyb2xlIjoiQWRtaW4iLCJpYXQiOjE3MzcxOTY0NzcsImV4cCI6MTczNzI4Mjg3N30.N1EVdZUHRkQRARkkHaNosug2wrKD9ODRnD54VXU1j9s",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/api/admin",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"admin"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

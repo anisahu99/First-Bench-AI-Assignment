@@ -59,7 +59,7 @@ const loginValidationSchema = Joi.object({
 
     password: Joi.string()
         .min(8)
-        .pattern(new RegExp('^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d@$!%*?&]{8,}$'))
+        .pattern(/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d@$!%*?&]{8,}$/)
         .required()
         .messages({
             "string.pattern.base": "Password must be at least 8 characters long and contain at least one letter and one number.",
