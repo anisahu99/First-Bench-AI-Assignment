@@ -245,12 +245,6 @@ You can test the API endpoints using Postman. Follow these steps:
 
 ---
 
-## Postman Collection
-You can access the Postman collection for testing all APIs via this link:  
-[User Management System API Collection](#)  
-Alternatively, you can download the JSON file from this repository and import it into Postman.
-
----
 
 ## Folder Structure
 - `controllers/`: Logic for API endpoints
