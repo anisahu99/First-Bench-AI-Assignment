@@ -255,6 +255,8 @@ Alternatively, you can download the JSON file from this repository and import it
 ## Folder Structure
 - `controllers/`: Logic for API endpoints
 - `models/`: Mongoose schemas
+- `config/`: Database connection
+- `docs/`: API documentation
 - `routes/`: API routes
 - `middleware/`: Middleware for authentication and validation
 - `validators/`: Schema validation functions
